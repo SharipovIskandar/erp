@@ -25,5 +25,9 @@ class SchoolClass extends Model
     {
         return $this->hasMany(Subject::class, 'class_id');
     }
+    public function moonshineUsers()
+    {
+        return $this->hasMany(MoonshineUser::class, 'class_id');
+    }
 }
 

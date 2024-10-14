@@ -8,12 +8,15 @@ use MoonShine\Providers\MoonShineApplicationServiceProvider;
 use MoonShine\MoonShine;
 use MoonShine\Menu\MenuGroup;
 use MoonShine\Menu\MenuItem;
-use MoonShine\Resources\MoonShineUserResource;
-use MoonShine\Resources\MoonShineUserRoleResource;
 use MoonShine\Contracts\Resources\ResourceContract;
 use MoonShine\Menu\MenuElement;
 use MoonShine\Pages\Page;
 use Closure;
+use App\MoonShine\Resources\TeacherResource;
+use App\MoonShine\Resources\StudentResource;
+use App\MoonShine\Resources\SchoolClassResource;
+use App\MoonShine\Resources\ExamResource;
+use MoonShine\Resources\MoonShineUserResource;
 
 class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 {
@@ -22,7 +25,13 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
      */
     protected function resources(): array
     {
-        return [];
+        return [
+            new ExamResource(),
+            new TeacherResource(),
+            new StudentResource(),
+            new SchoolClassResource(),
+            // Boshqa resurslar agar bo'lsa, ularni shu yerda qo'shing
+        ];
     }
 
     /**
@@ -30,7 +39,7 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
      */
     protected function pages(): array
     {
-        return [];
+        return []; // Agar qo'shimcha sahifalar kerak bo'lsa, shu yerda qo'shing
     }
 
     /**
@@ -39,37 +48,28 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
     protected function menu(): array
     {
         return [
-            MenuGroup::make(static fn() => __('moonshine::ui.resource.system'), [
                 MenuItem::make(
                     static fn() => __('moonshine::ui.resource.admins_title'),
                     new MoonShineUserResource()
                 ),
-//                MenuItem::make(
-//                    static fn() => __('moonshine::ui.resource.role_title'),
-//                    new MoonShineUserRoleResource()
-//                ),
-//                MenuItem::make(
-//                    static fn() => __('Sinf boshqaruvi'),
-//                    new \App\Resources\SchoolClassResource() // Sizning sinf resursingiz
-//                ),
-//                MenuItem::make(
-//                    static fn() => __('Fan boshqaruvi'),
-//                    new \App\Resources\SubjectResource() // Sizning fan resursingiz
-//                ),
-//                MenuItem::make(
-//                    static fn() => __('Imtihon boshqaruvi'),
-//                    new \App\Resources\ExamResource() // Sizning imtihon resursingiz
-//                ),
-//                // O'quvchilar
-//                MenuItem::make(
-//                    static fn() => __('O\'quvchilar boshqaruvi'),
-//                    new \App\Resources\StudentResource() // Sizning o'quvchi resursingiz
-//                ),
+            MenuGroup::make(__('Direktor'), [
+                MenuItem::make(
+                    static fn() => __('O`qituvchilar'),
+                    new TeacherResource()
+                ),
+                MenuItem::make(
+                    static fn() => __('Talabalar'),
+                    new StudentResource()
+                ),
+                MenuItem::make(
+                    static fn() => __('Sinf'),
+                    new SchoolClassResource()
+                ),
+                MenuItem::make(
+                    static fn() => __('Imtihonlar'),
+                    new ExamResource()
+                ),
             ]),
-
-            MenuItem::make('Documentation', 'https://moonshine-laravel.com/docs')
-                ->badge(fn() => 'Check')
-                ->blank(),
         ];
     }
 
@@ -78,6 +78,6 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
      */
     protected function theme(): array
     {
-        return [];
+        return []; // Agar mavzuga qo'shimcha parametrlar kerak bo'lsa, shu yerda qo'shing
     }
 }
