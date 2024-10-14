@@ -44,10 +44,27 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                     static fn() => __('moonshine::ui.resource.admins_title'),
                     new MoonShineUserResource()
                 ),
-                MenuItem::make(
-                    static fn() => __('moonshine::ui.resource.role_title'),
-                    new MoonShineUserRoleResource()
-                ),
+//                MenuItem::make(
+//                    static fn() => __('moonshine::ui.resource.role_title'),
+//                    new MoonShineUserRoleResource()
+//                ),
+//                MenuItem::make(
+//                    static fn() => __('Sinf boshqaruvi'),
+//                    new \App\Resources\SchoolClassResource() // Sizning sinf resursingiz
+//                ),
+//                MenuItem::make(
+//                    static fn() => __('Fan boshqaruvi'),
+//                    new \App\Resources\SubjectResource() // Sizning fan resursingiz
+//                ),
+//                MenuItem::make(
+//                    static fn() => __('Imtihon boshqaruvi'),
+//                    new \App\Resources\ExamResource() // Sizning imtihon resursingiz
+//                ),
+//                // O'quvchilar
+//                MenuItem::make(
+//                    static fn() => __('O\'quvchilar boshqaruvi'),
+//                    new \App\Resources\StudentResource() // Sizning o'quvchi resursingiz
+//                ),
             ]),
 
             MenuItem::make('Documentation', 'https://moonshine-laravel.com/docs')
