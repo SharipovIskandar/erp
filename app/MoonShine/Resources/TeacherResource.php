@@ -56,9 +56,12 @@ class TeacherResource extends ModelResource
      */
     public function index(): Collection
     {
-        // Teacher rolining ID sini olish
+        // Teacher ro'lini aniqlaymiz va userlarni filtrlaymiz
         $teacherRoleId = Role::where('name', 'teacher')->value('id');
 
-        return $this->model::where('moonshine_user_role_id', $teacherRoleId)->get();
+        return $this->model::whereHas('roles', function ($query) use ($teacherRoleId) {
+            $query->where('id', $teacherRoleId);
+        })->get();
     }
+
 }

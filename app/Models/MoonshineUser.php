@@ -33,10 +33,12 @@ class MoonshineUser extends Authenticatable
     /**
      * Userning rolini olish
      */
-    public function role()
+    public function roles()
     {
-        return $this->belongsTo(Role::class, 'moonshine_user_role_id');
+        // Ko'pdan-ko'p munosabat, Spatie permission orqali
+        return $this->belongsToMany(Role::class, 'model_has_roles', 'model_id', 'role_id');
     }
+
 
     /**
      * Userning sinfini olish

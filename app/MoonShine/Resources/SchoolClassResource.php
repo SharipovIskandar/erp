@@ -7,6 +7,7 @@ namespace App\MoonShine\Resources;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\SchoolClass;
+use MoonShine\Fields\Text;
 use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
@@ -30,6 +31,7 @@ class SchoolClassResource extends ModelResource
         return [
             Block::make([
                 ID::make()->sortable(),
+                Text::make('Sinf nomi', "class_name")->sortable(),
             ]),
         ];
     }
